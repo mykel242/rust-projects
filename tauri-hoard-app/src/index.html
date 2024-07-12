@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./simpledotcss/simple.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hoard App</title>
+    <script type="module" src="/main.js" defer></script>
+  </head>
+
+  <body>
+    <div>
+      <h3>For your Hoard.</h3>
+    </div>
+
+    <div>
+      <label>
+        <h3>Start Date //</h3>
+        <input type="date" name="party" min="2024-01-01" max="2030-12-31" />
+        <button id="Today">Today</button>
+      </label>
+      <form class="row" id="greet-form">
+        <input id="greet-input" placeholder="Enter a name..." />
+        <button type="submit">Greet</button>
+      </form>
+      <p id="greet-msg"></p>
+    </div>
+  </body>
+</html>
