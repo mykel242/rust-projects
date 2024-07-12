@@ -1,31 +1,50 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./simpledotcss/simple.min.css">
-    <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Hoard App</title>
-    <script type="module" src="/main.js" defer></script>
-  </head>
+<head>
+  <title>Hoard App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/uikit/css/uikit.min.css" />
+  <script src="/uikit/js/uikit.min.js"></script>
+  <script src="/uikit/js/uikit-icons.min.js"></script>
 
-  <body>
-    <div>
-      <h3>For your Hoard.</h3>
+  <!-- Tauri / Rust bindings-->
+  <script type="module" src="/main.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active"><a href="">home</a></li>
+          <li class=""><a href="">accounts</a></li>
+          <li class=""><a href="">transactions</a></li>
+          <li class=""><a href="">summarize</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="uk-container">
+    <div class="uk-animation-slide-bottom">
+      <p class="notice" id="greet-msg">Important information</p>
     </div>
 
-    <div>
-      <label>
-        <h3>Start Date //</h3>
-        <input type="date" name="party" min="2024-01-01" max="2030-12-31" />
-        <button id="Today">Today</button>
-      </label>
-      <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
-      </form>
-      <p id="greet-msg"></p>
-    </div>
-  </body>
+    <form class="row" id="greet-form">
+      <input id="greet-input" placeholder="Enter a name..." class="uk-input uk-form-width-medium" type="text">
+      <button type="submit" class="uk-button uk-button-primary">Greet</button>
+    </form>
+  </div>
+
+  <!-- <div>
+    <label>
+      <h3>// Date //</h3>
+      <input type="date" name="party" min="2024-01-01" max="2030-12-31" />
+      <button id="Today">Today</button>
+    </label>
+  </div> -->
+</body>
+
 </html>
