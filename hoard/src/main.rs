@@ -40,8 +40,32 @@ fn handle_events() -> io::Result<bool> {
 }
 
 fn ui(frame: &mut Frame) {
+    let areas = Layout::new(
+        Direction::Vertical,
+        [
+            Constraint::Length(3),
+            Constraint::Length(3),
+            Constraint::Length(3),
+            Constraint::Length(3),
+            Constraint::Min(0),
+        ],
+    )
+    .split(frame.size());
+
     frame.render_widget(
-        Paragraph::new("Hello World.").block(Block::bordered().title("xxx")),
-        frame.size(),
+        Paragraph::new("Hello 😵‍💫 World.").block(Block::bordered().title("0")),
+        areas[0],
+    );
+    frame.render_widget(
+        Paragraph::new("Hello 🌍").block(Block::bordered().title("1")),
+        areas[1],
+    );
+    frame.render_widget(
+        Paragraph::new("Hello 🌎").block(Block::bordered().title("2")),
+        areas[2],
+    );
+    frame.render_widget(
+        Paragraph::new("q to exit").block(Block::bordered().title("4")),
+        areas[4],
     );
 }
