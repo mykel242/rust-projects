@@ -1,8 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod db;
+// mod db;
 // mod account;
+
+use serde::{Deserialize, Serialize};
+use serde_json::json;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -24,48 +27,50 @@ fn get_accounts_stub() -> String {
                     "balance" : 0.0,
                 },
             ]}"#;
-    let s = format!("{}",data);
-    println!("{}",s);
+    let s = format!("{}", data);
+    println!("{}", s);
     s
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 enum AccountKind {
-    CHECK,
-    SAVE,
-    INVEST,
-    I529,
+    Check = 1,
+    Save = 2,
+    Invest = 3,
+    I529 = 529,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 struct Account {
     name: String,
     kind: AccountKind,
     balance: f32,
-    balance_paid: f32 ,   
+    balance_paid: f32,
 }
 
-
-fn get_accounts_rust() {
-
+#[tauri::command]
+fn get_accounts_rust() -> serde_json::Value {
     let a = Account {
         name: "my checking 1234".to_string(),
-        kind: AccountKind::CHECK,
+        kind: AccountKind::Check,
         balance: 1234.56,
-        balance_paid: 999.00
+        balance_paid: 999.00,
     };
-    // Ok(())
+
+    json!(a)
 }
-
-
 
 fn main() {
     tauri::Builder::default()
         .setup(|_app| {
-            db::init();
+            // db::init();
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![greet, get_accounts_stub])
+        .invoke_handler(tauri::generate_handler![
+            greet,             // hello world
+            get_accounts_stub, // get hardcoded json as a string
+            get_accounts_rust, // get a rust Account Object as json
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
