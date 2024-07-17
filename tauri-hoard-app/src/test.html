@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>My Test App</title>
+  <link rel="stylesheet" href="/uikit/css/uikit.css" />
+  <script src="/jquery/jquery.min.js"></script>
+  <script src="/uikit/js/uikit.min.js"></script>
+  <script src="/uikit/js/uikit-icons.min.js"></script>
+</head>
+
+<body>
+  <div class="uk-container uk-margin-top">
+
+    <div class="uk-alert-danger" uk-alert>
+      <a href class="uk-alert-close" uk-close></a>
+      <h3>Notice</h3>
+      <span class="uk-label">Default</span>
+      <span class="uk-label uk-label-success">Success</span>
+      <span class="uk-label uk-label-warning">Warning</span>
+      <span class="uk-label uk-label-danger">Danger</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.</p>
+      <progress id="js-progressbar" class="uk-progress" value="0" max="100"></progress>
+    </div>
+
+    <ul uk-accordion>
+      <li>
+        <a class="uk-accordion-title" href>Hello</a>
+        <div class="uk-accordion-content">
+          Irony man bun celiac four loko hammock plaid. Keffiyeh edison bulb retro truffaut man bun hot chicken food
+          truck literally photo booth raclette poke brunch JOMO air plant. Hammock pinterest live-edge neutra, bicycle
+          rights grailed organic semiotics fam irony. Literally etsy ethical hammock paleo cliche unicorn retro DSA
+          asymmetrical XOXO lo-fi cronut. Tbh tumeric offal beard. Hexagon artisan hot chicken, cred yr tote bag
+          solarpunk distillery ugh glossier craft beer brunch echo park. VHS bitters cornhole kitsch shabby chic poke.
+
+        </div>
+      </li>
+      <li>
+        <a class="uk-accordion-title" href>World</a>
+        <div class="uk-accordion-content">
+          Irony man bun celiac four loko hammock plaid. Keffiyeh edison bulb retro truffaut man bun hot chicken food
+          truck literally photo booth raclette poke brunch JOMO air plant. Hammock pinterest live-edge neutra, bicycle
+          rights grailed organic semiotics fam irony. Literally etsy ethical hammock paleo cliche unicorn retro DSA
+          asymmetrical XOXO lo-fi cronut. Tbh tumeric offal beard. Hexagon artisan hot chicken, cred yr tote bag
+          solarpunk distillery ugh glossier craft beer brunch echo park. VHS bitters cornhole kitsch shabby chic poke.
+        </div>
+      </li>
+    </ul>
+
+    <h1 class="uk-heading-line uk-text-right"><span>Heading Line</span></h1>
+
+    <a class="uk-button uk-button-default" href="#modal-sections" uk-toggle>Open</a>
+
+    <div id="modal-sections" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Modal Title</h2>
+        </div>
+        <div class="uk-modal-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.</p>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary" type="button">Save</button>
+        </div>
+      </div>
+    </div>
+
+
+    <ul uk-tab>
+      <li class="uk-active"><a href="#">Left</a></li>
+      <li><a href="#">Item</a></li>
+      <li><a href="#">Item</a></li>
+      <li class="uk-disabled"><a>Disabled</a></li>
+    </ul>
+
+    <nav aria-label="Breadcrumb">
+      <ul class="uk-breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Linked Category</a></li>
+        <li class="uk-disabled"><a>Disabled Category</a></li>
+        <li><span aria-current="page">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.</span></li>
+      </ul>
+    </nav>
+
+    <p uk-margin>
+      <!-- <a class="uk-button uk-button-default" href="#">Link</a>
+      <button class="uk-button uk-button-default">Button</button>
+      <button class="uk-button uk-button-default" disabled>Disabled</button> -->
+      <!-- <div class="uk-button-group">
+      <button class="uk-button uk-button-primary">Button</button>
+      <button class="uk-button uk-button-secondary">Button</button>
+      <button class="uk-button uk-button-danger">Button</button>
+    </div> -->
+    </p>
+    <!-- xxx -->
+    <div class="uk-column-1-2 uk-column-divider">
+      <a class="uk-button uk-button-default" href="#">Link</a>
+      <button class="uk-button uk-button-default">Button</button>
+      <button class="uk-button uk-button-default" disabled>Disabled</button>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+
+      <blockquote cite="#" class="uk-column-span">
+        <p>All we have to decide is what to do with the time that is given us.</p>
+        <footer>Gandalf in in <cite><a href="">The Fellowship of the Ring</a></cite></footer>
+      </blockquote>
+
+      <button class="uk-button uk-button-primary">Button</button>
+      <button class="uk-button uk-button-secondary">Button</button>
+      <button class="uk-button uk-button-danger">Button</button>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore.</p>
+    </div>
+
+
+
+    <!-- zzz -->
+
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Default</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-primary uk-card-body">
+          <h3 class="uk-card-title">Primary</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-secondary uk-card-body">
+          <h3 class="uk-card-title">Secondary</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-flex uk-flex-center uk-margin">
+      <div class="uk-card uk-card-default uk-card-body">Item 1</div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 2</div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 3</div>
+    </div>
+
+    <form class="uk-margin">
+      <fieldset class="uk-fieldset">
+
+        <legend class="uk-legend">Legend</legend>
+
+        <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Input" aria-label="Input">
+        </div>
+
+        <div class="uk-margin">
+          <select class="uk-select" aria-label="Select">
+            <option>Option 01</option>
+            <option>Option 02</option>
+          </select>
+        </div>
+
+        <div class="uk-margin">
+          <textarea class="uk-textarea" rows="5" placeholder="Textarea" aria-label="Textarea"></textarea>
+        </div>
+
+        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+          <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
+          <label><input class="uk-radio" type="radio" name="radio2"> B</label>
+        </div>
+
+        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+          <label><input class="uk-checkbox" type="checkbox" checked> A</label>
+          <label><input class="uk-checkbox" type="checkbox"> B</label>
+        </div>
+
+        <div class="uk-margin">
+          <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1" aria-label="Range">
+        </div>
+
+      </fieldset>
+    </form>
+
+    <div class="uk-overflow-auto">
+      <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+        <thead>
+          <tr>
+            <th class="uk-table-shrink"></th>
+            <th class="uk-table-shrink">Preserve</th>
+            <th class="uk-table-expand">Expand + Link</th>
+            <th class="uk-width-small">Truncate</th>
+            <th class="uk-table-shrink uk-text-nowrap">Shrink + Nowrap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input class="uk-checkbox" type="checkbox" aria-label="Checkbox"></td>
+            <td>
+              <!-- <img class="uk-preserve-width uk-border-circle" src="images/avatar.jpg" width="40" height="40" alt=""> -->
+            </td>
+            <td class="uk-table-link">
+              <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor.</a>
+            </td>
+            <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+            </td>
+            <td class="uk-text-nowrap">Lorem ipsum dolor</td>
+          </tr>
+
+          <tr>
+            <td><input class="uk-checkbox" type="checkbox" aria-label="Checkbox"></td>
+            <td>
+              <!-- <img class="uk-preserve-width uk-border-circle" src="images/avatar.jpg" width="40" height="40" alt=""> -->
+            </td>
+            <td class="uk-table-link">
+              <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor.</a>
+            </td>
+            <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+            </td>
+            <td class="uk-text-nowrap">Lorem ipsum dolor</td>
+          </tr>
+
+          <tr>
+            <td><input class="uk-checkbox" type="checkbox" aria-label="Checkbox"></td>
+            <td>
+              <!-- <img class="uk-preserve-width uk-border-circle" src="images/avatar.jpg" width="40" height="40" alt=""> -->
+            </td>
+            <td class="uk-table-link">
+              <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor.</a>
+            </td>
+            <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+            </td>
+            <td class="uk-text-nowrap">Lorem ipsum dolor</td>
+          </tr>
+
+          <tr>
+            <td><input class="uk-checkbox" type="checkbox" aria-label="Checkbox"></td>
+            <td>
+              <!-- <img class="uk-preserve-width uk-border-circle" src="images/avatar.jpg" width="40" height="40" alt=""> -->
+            </td>
+            <td class="uk-table-link">
+              <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor.</a>
+            </td>
+            <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+            </td>
+            <td class="uk-text-nowrap">Lorem ipsum dolor</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+  </div>
+
+  <script>
+
+    UIkit.util.ready(function () {
+
+      var bar = document.getElementById('js-progressbar');
+      var animate = setInterval(function () {
+        bar.value += 3;
+        if (bar.value >= bar.max) {
+          clearInterval(animate);
+        }
+      }, 500);
+    });
+
+  </script>
+</body>
+
+</html>

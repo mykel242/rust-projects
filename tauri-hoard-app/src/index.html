@@ -5,30 +5,37 @@
   <title>Hoard App</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/uikit/css/uikit.min.css" />
+
+  <link rel="stylesheet" href="/uikit/css/uikit.css" />
+  <script src="/jquery/jquery.min.js"></script>
   <script src="/uikit/js/uikit.min.js"></script>
   <script src="/uikit/js/uikit-icons.min.js"></script>
 
   <!-- Tauri / Rust bindings-->
-  <script type="module" src="/main.js" defer></script>
+  <!-- <script type="module" src="/main.js" defer></script> -->
 </head>
 
 <body>
-  <header>
+  <!-- <header>
     <nav class="uk-navbar-container" uk-navbar>
       <div class="uk-navbar-center">
         <ul class="uk-navbar-nav">
-          <li id="linkHome"     class="uk-active"><a href="">home</a></li>
+          <li id="linkHome" class="uk-active"><a href="">home</a></li>
           <li id="linkAccounts" class=""><a href="">accounts</a></li>
-          <li class=""><a href="">transactions</a></li>
-          <li class=""><a href="">summarize</a></li>
         </ul>
+        <button id="btn-new-account" class="uk-button uk-button-primary"><span uk-icon="plus-circle"></span>
+          Account</button>
       </div>
     </nav>
-  </header>
+  </header> -->
 
-  <div class="uk-container">
-    <div class="uk-animation-slide-bottom">
+  <div class="uk-block uk-block-muted">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    magna.
+  </div>
+
+  <!-- <div class="uk-container uk-margin">
+    <div>
       <p class="notice" id="greet-msg">Important information</p>
     </div>
 
@@ -36,7 +43,32 @@
       <input id="greet-input" placeholder="Enter a name..." class="uk-input uk-form-width-medium" type="text">
       <button type="submit" class="uk-button uk-button-primary">Greet</button>
     </form>
-  </div>
+  </div> -->
+
 </body>
 
 </html>
+
+
+<!-- <fieldset>
+    <legend>New Account</legend>
+    <div class="uk-form-row">
+      <input type="text" placeholder="Account name...">
+    </div>
+    <div class="uk-form-row">
+          <div class="uk-grid uk-grid-divider">
+            <div class="uk-width-1-2">
+              <p class="uk-">Account Type</p>
+            </div>
+            <div class="uk-width-1-2">
+              <select class="uk-select">
+                <option>Check</option>
+                <option>Save</option>
+                <option>Invest</option>
+                <option>College</option>
+              </select>
+            </div>
+          </div>
+
+  </div>
+  </fieldset> -->

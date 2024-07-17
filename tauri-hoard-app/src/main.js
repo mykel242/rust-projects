@@ -2,6 +2,8 @@ const { invoke } = window.__TAURI__.tauri;
 
 let greetInputEl;
 let greetMsgEl;
+let btnNewAccount;
+let divNewAccountFormContainer;
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -17,6 +19,7 @@ async function get_accounts_rust() {
   let data = await invoke("get_accounts_rust");
   console.log(data);
 }
+
 window.addEventListener("DOMContentLoaded", () => {
 
   // get_accounts_stub();
@@ -28,5 +31,18 @@ window.addEventListener("DOMContentLoaded", () => {
     greet();
   });
 
+  btnNewAccount = document.querySelector("#btn-new-account");
+  divNewAccountFormContainer = document.querySelector("#new-account-form-container");
+
+  btnNewAccount.addEventListener("click", (e) =>{
+    e.preventDefault();
+    console.log("New Account Button Clicked");
+    divNewAccountFormContainer.removeAttribute("hidden");
+    btnNewAccount.setAttribute("disabled", "");
+    btnNewAccount.classList.remove("uk-button-primary");
+    btnNewAccount.classList.add("uk-button-disabled");
+
+  });
+  //document.querySelector
 
 });
