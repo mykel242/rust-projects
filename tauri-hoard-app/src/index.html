@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
-  <title>Hoard App</title>
+  <title>My Test App</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,11 +12,60 @@
   <script src="/uikit/js/uikit-icons.min.js"></script>
 
   <!-- Tauri / Rust bindings-->
-  <!-- <script type="module" src="/main.js" defer></script> -->
+  <script type="module" src="/main.js" defer></script>
+  <style>
+    .no-dec {
+      list-style-type: none;
+    }
+  </style>
 </head>
-
 <body>
-  <!-- <header>
+  <div class="uk-container uk-margin-top">
+
+      <!-- top nav bar -->
+      <ul uk-tab>
+        <li class="uk-active"><a href="#">home</a></li>
+        <li><a href="#">accounts</a></li>
+      </ul>
+      <div class="uk-position-top-right">
+        <ul class="uk-margin-top uk-margin-right no-dec">
+            <li><h2>hoard.</h2></li>
+        </ul>
+    </div>
+
+    <!-- main body -->
+     
+    <div class="uk-section uk-section-muted">
+      <div class="uk-container">
+  
+          <h3>Section Muted</h3>
+  
+          <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+              <div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+              </div>
+              <div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+              </div>
+              <div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+              </div>
+          </div>
+  
+      </div>
+  </div>
+
+
+  </div><!-- outer-most container -->
+</body>
+</html>
+
+
+
+
+
+  <!-- 
+  <header>
     <nav class="uk-navbar-container" uk-navbar>
       <div class="uk-navbar-center">
         <ul class="uk-navbar-nav">
@@ -27,48 +76,5 @@
           Account</button>
       </div>
     </nav>
-  </header> -->
-
-  <div class="uk-block uk-block-muted">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-    magna.
-  </div>
-
-  <!-- <div class="uk-container uk-margin">
-    <div>
-      <p class="notice" id="greet-msg">Important information</p>
-    </div>
-
-    <form class="row" id="greet-form">
-      <input id="greet-input" placeholder="Enter a name..." class="uk-input uk-form-width-medium" type="text">
-      <button type="submit" class="uk-button uk-button-primary">Greet</button>
-    </form>
-  </div> -->
-
-</body>
-
-</html>
-
-
-<!-- <fieldset>
-    <legend>New Account</legend>
-    <div class="uk-form-row">
-      <input type="text" placeholder="Account name...">
-    </div>
-    <div class="uk-form-row">
-          <div class="uk-grid uk-grid-divider">
-            <div class="uk-width-1-2">
-              <p class="uk-">Account Type</p>
-            </div>
-            <div class="uk-width-1-2">
-              <select class="uk-select">
-                <option>Check</option>
-                <option>Save</option>
-                <option>Invest</option>
-                <option>College</option>
-              </select>
-            </div>
-          </div>
-
-  </div>
-  </fieldset> -->
+  </header> 
+  -->
