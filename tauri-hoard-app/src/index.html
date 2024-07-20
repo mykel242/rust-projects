@@ -25,55 +25,142 @@
       list-style-type: none;
     }
 
-    .pad-me {
+    .pad {
       padding: 1em;
     }
 
-    .pad-me-lt {
+    .pad-lt {
       padding-left: 1em;
+    }
+
+    .flt-rt {
+      float: right;
+    }
+
+    .mar-rt {
+      margin-right: 0.5em;
+    }
+
+    .hide-me {
+      display: none;
     }
   </style>
 </head>
+
 <body>
   <div class="uk-container uk-margin-top">
-      <!-- top nav bar -->
-      <ul uk-tab>
-        <li class="uk-active"><a href="#">home</a></li>
-        <li><a href="#">accounts</a></li>
+    <!-- top nav bar -->
+    <ul uk-tab>
+      <li class="uk-active"><a href="#">home</a></li>
+      <li><a href="#">accounts</a></li>
+    </ul>
+    <div class="uk-position-top-right app-brand">
+      <ul class="uk-margin-top uk-margin-right no-dec">
+        <li>
+          <h2>hoard.</h2>
+        </li>
       </ul>
-      <div class="uk-position-top-right app-brand">
-        <ul class="uk-margin-top uk-margin-right no-dec">
-            <li><h2>hoard.</h2></li>
-        </ul>
     </div>
   </div>
   <!-- outer-most container -->
 
   <div class="uk-container uk-margin">
-    <div class="uk-section uk-section-primary pad-me-lt">
-      <h3>hello world.</h3>
-    </div>
+    <button id="btn-new-account" class="uk-button uk-button-primary"><span uk-icon="plus-circle"></span>
+      Account</button>
   </div>
 
 
+  <div id="welcome-section" class="uk-container uk-margin hide-me">
+    <div class="uk-section uk-section-primary pad-lt">
+      <h3>hello world.</h3>
+      <p>Vestibulum eleifend sem ac dui fermentum facilisis. Aliquam faucibus, magna venenatis tincidunt laoreet, nibh
+        felis finibus dui, non ornare felis massa sit amet lorem. Donec hendrerit dignissim accumsan. Fusce auctor ante
+        turpis. Praesent imperdiet augue quis diam sollicitudin, non vestibulum ex interdum. Nulla sit amet magna
+        ligula.</p>
+    </div>
+  </div>
+
+  <div id="new-account-form" class="uk-container uk-margin hide-me">
+    <div class="uk-section uk-section-muted pad">
+      <form class="uk-margin">
+        <fieldset class="uk-fieldset">
+          <legend class="uk-legend">new account</legend>
+          <div class="uk-margin">
+            <input id="new-account-input-label" class="uk-input" type="text" placeholder="account label"
+              aria-label="Input">
+          </div>
+          <div class="uk-margin">
+            <input id="new-account-input-balance" class="uk-input" type="text" placeholder="starting balance"
+              aria-label="Input">
+          </div>
+          <div class="uk-margin">
+            <select id="new-account-select-type" class="uk-select" aria-label="Select">
+              <option>Checking</option>
+              <option>Saving</option>
+              <option>Investment</option>
+              <option>College (529)</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </fieldset>
+      </form>
+      <div class="uk-margin">
+        <button id="new-account-btn-ok" class="uk-button uk-button-primary flt-rt">ok</button>
+        <button id="new-account-btn-cancel" class="uk-button uk-button-secondary flt-rt mar-rt">cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    let btnNewAccount;
+    let btnNewAccountOk;
+    let btnNewAccountCancel;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      // $("#welcome-section").delay(1000 * 2).fadeOut(400);
+
+      // Show the form when the + account button is clicked
+      btnNewAccount = document.querySelector("#btn-new-account");
+      btnNewAccount.addEventListener("click", (e) => {
+        btnNewAccount.setAttribute('disabled', '');
+        e.preventDefault();
+        $('#new-account-form').fadeIn(400);
+      });
+
+      // Check the form, save the data, hide the form
+      btnNewAccountOk = document.querySelector("#new-account-btn-ok");
+      btnNewAccountOk.addEventListener("click", (e) => {
+
+        // Send the data to the backend
+        console.log('Ship it!');
+
+        // hide the form
+        $('#new-account-form').fadeToggle(250, (d) => {
+          console.log('it hided!');
+          //clear the form
+
+          //re-enable the + account button
+          btnNewAccount.removeAttribute('disabled');
+        });
+      });
+
+      btnNewAccountCancel = document.querySelector("#new-account-btn-cancel");
+      btnNewAccountCancel.addEventListener("click", (e) => {
+        console.log("cancelled");
+        // hide the form
+        $('#new-account-form').fadeToggle(250, (d) => {
+          console.log('it hided!');
+          
+          // clear the form
+
+          //re-enable the + account button
+          btnNewAccount.removeAttribute('disabled');
+        });
+      });
+
+
+    });
+
+  </script>
 </body>
 </html>
-
-
-
-
-
-  <!-- 
-  <header>
-    <nav class="uk-navbar-container" uk-navbar>
-      <div class="uk-navbar-center">
-        <ul class="uk-navbar-nav">
-          <li id="linkHome" class="uk-active"><a href="">home</a></li>
-          <li id="linkAccounts" class=""><a href="">accounts</a></li>
-        </ul>
-        <button id="btn-new-account" class="uk-button uk-button-primary"><span uk-icon="plus-circle"></span>
-          Account</button>
-      </div>
-    </nav>
-  </header> 
-  -->

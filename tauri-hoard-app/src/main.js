@@ -37,10 +37,10 @@ window.addEventListener("DOMContentLoaded", () => {
   btnNewAccount.addEventListener("click", (e) =>{
     e.preventDefault();
     console.log("New Account Button Clicked");
-    divNewAccountFormContainer.removeAttribute("hidden");
-    btnNewAccount.setAttribute("disabled", "");
-    btnNewAccount.classList.remove("uk-button-primary");
-    btnNewAccount.classList.add("uk-button-disabled");
+    // divNewAccountFormContainer.removeAttribute("hidden");
+    // btnNewAccount.setAttribute("disabled", "");
+    // btnNewAccount.classList.remove("uk-button-primary");
+    // btnNewAccount.classList.add("uk-button-disabled");
 
   });
   //document.querySelector
