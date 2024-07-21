@@ -34,7 +34,9 @@ enum AccountKind {
     Check = 1,
     Save = 2,
     Invest = 3,
-    I529 = 529,
+    I529 = 4,
+    Other = 5,
+    Debt = 6
 }
 
 #[derive(Debug, Serialize, Deserialize)]

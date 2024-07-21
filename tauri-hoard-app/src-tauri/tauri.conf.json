@@ -19,8 +19,8 @@
     "windows": [
       {
         "title": "tauri-hoard-app",
-        "width": 800,
-        "height": 600
+        "width": 640,
+        "height": 960
       }
     ],
     "security": {
