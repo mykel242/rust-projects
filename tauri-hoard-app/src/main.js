@@ -1,13 +1,15 @@
 const { invoke } = window.__TAURI__.tauri;
 
-let greetInputEl;
-let greetMsgEl;
+// let greetInputEl;
+// let greetMsgEl;
 let btnNewAccount;
 let divNewAccountFormContainer;
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
+  // greetMsgEl.textContent = await invoke("greet", { 
+  //     name: greetInputEl.value 
+  // });
 }
 
 async function get_accounts_stub() {
@@ -24,12 +26,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // get_accounts_stub();
   get_accounts_rust();
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
-  });
+  // greetInputEl = document.querySelector("#greet-input");
+  // greetMsgEl = document.querySelector("#greet-msg");
+  // document.querySelector("#greet-form").addEventListener("submit", (e) => {
+  //   e.preventDefault();
+  //   greet();
+  // });
 
   btnNewAccount = document.querySelector("#btn-new-account");
   divNewAccountFormContainer = document.querySelector("#new-account-form-container");

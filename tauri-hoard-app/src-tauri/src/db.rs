@@ -34,7 +34,10 @@ fn db_file_exists() -> bool {
 fn get_db_path() -> String {
     let home_dir = dirs::home_dir().unwrap();
     let filename = "/some_path/some_file";
-    /* "/.config/orion/database.sqlite" */
-    println!("db::get_db_path // {}{}", home_dir.to_string_lossy(), filename);
+    println!(
+        "db::get_db_path // {}{}",
+        home_dir.to_string_lossy(),
+        filename
+    );
     home_dir.to_str().unwrap().to_string() + filename
 }

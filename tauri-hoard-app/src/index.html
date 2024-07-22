@@ -13,6 +13,7 @@
 
   <!-- Tauri / Rust bindings-->
   <script type="module" src="/main.js" defer></script>
+
   <style>
     .app-brand {
       margin-top: 0.5em;
@@ -43,6 +44,15 @@
 
     .hide-me {
       display: none;
+    }
+
+    input.invalid,
+    input:invalid {
+      box-shadow: 0 0 5px 1px rgb(62, 194, 242);
+    }
+
+    input:focus:invalid {
+      box-shadow: none;
     }
   </style>
 </head>
@@ -83,27 +93,28 @@
   <div id="new-account-form" class="uk-container uk-margin hide-me">
     <div class="uk-section uk-section-muted pad">
       <form class="uk-margin">
-        <fieldset class="uk-fieldset">
-          <legend class="uk-legend">new account</legend>
-          <div class="uk-margin">
-            <input id="new-account-form-label" class="uk-input" type="text" placeholder="account label"
-              aria-label="Input">
-          </div>
-          <div class="uk-margin">
-            <input id="new-account-form-balance" class="uk-input" type="text" placeholder="starting balance"
-              aria-label="Input">
-          </div>
-          <div class="uk-margin">
-            <select id="new-account-form-type" class="uk-select" aria-label="Select">
-              <option value="1">Checking</option>
-              <option value="2">Saving</option>
-              <option value="3">Investment</option>
-              <option value="4">College (529)</option>
-              <option value="5">Other</option>
-              <option value="6">Debt</option>
-            </select>
-          </div>
-        </fieldset>
+        <legend class="uk-legend">new account</legend>
+        <div class="uk-margin">
+          <label>Account</label>
+          <input id="new-account-form-label" class="uk-input" type="text" placeholder="required" aria-label="Input"
+            minlength="3" maxlength="512" required>
+        </div>
+        <div class="uk-margin">
+          <label>Balance</label>
+          <input id="new-account-form-balance" class="uk-input" type="text" placeholder="$0.00" aria-label="Input"
+            required>
+        </div>
+        <div class="uk-margin">
+          <select id="new-account-form-type" class="uk-select" aria-label="Select" required>
+            <option disabled value="0" selected hidden>Type of Account</option>
+            <option value="1">Checking</option>
+            <option value="2">Saving</option>
+            <option value="3">Investment</option>
+            <option value="4">College (529)</option>
+            <option value="5">Other</option>
+            <option value="6">Debt</option>
+          </select>
+        </div>
       </form>
       <div class="uk-margin">
         <button id="new-account-btn-ok" class="uk-button uk-button-primary flt-rt">ok</button>
@@ -132,17 +143,21 @@
       btnNewAccountOk = document.querySelector("#new-account-btn-ok");
       btnNewAccountOk.addEventListener("click", (e) => {
 
-        // Send the data to the backend
-        console.log("Ship it!");
+        let valid = validateNewAccountForm();
 
-        // hide the form
-        $("#new-account-form").fadeToggle(250, (d) => {
-          console.log("it hided!");
-          //clear the form
-          resetAccountForm();
-          //re-enable the + account button
-          btnNewAccount.removeAttribute("disabled");
-        });
+        if (valid) {
+          // Send the data to the backend
+          console.log("Ship it!");
+
+          // hide the form
+          $("#new-account-form").fadeToggle(250, (d) => {
+            console.log("it hided!");
+            //clear the form
+            resetAccountForm();
+            //re-enable the + account button
+            btnNewAccount.removeAttribute("disabled");
+          });
+        }
       });
 
       btnNewAccountCancel = document.querySelector("#new-account-btn-cancel");
@@ -151,7 +166,7 @@
         // hide the form
         $("#new-account-form").fadeToggle(250, (d) => {
           console.log("it hided!");
-          
+
           // clear the form
           resetAccountForm();
           //re-enable the + account button
@@ -161,13 +176,54 @@
 
 
     });
+    function validateNewAccountForm() {
+
+      formValid = true;
+
+      // check label is a string
+      let label = $("#new-account-form-label").val();
+      if (!isAlphanumeric(label)) {
+        formValid = false;
+        $("#new-account-form-label").addClass("invalid");
+      } else {
+        $("#new-account-form-label").removeClass("invalid");
+      }
+
+      // check that balance is a number
+      let balance = $("#new-account-form-balance").val();
+      let result = Intl.NumberFormat("us-EN").format(balance);
+      if (result == "NaN") {
+        formValid = false;
+        $("#new-account-form-balance").addClass("invalid");
+      } else {
+        $("#new-account-form-balance").removeClass("invalid");
+      }
+
+      // check that type is not 0
+      let type = $("#new-account-form-type").val();
+      if (type == 0 || type == null) {
+        formValid = false;
+      }
+      console.log(label, result, type);
+
+      return formValid;
+    }
 
     function resetAccountForm() {
       $("#new-account-form-label").val("");
       $("#new-account-form-balance").val("");
-      $("#new-account-form-type").val(1);
+      $("#new-account-form-type").val(0);
+    }
+
+    function isAlphanumeric(str) {
+      return str.match(/^[a-zA-Z0-9]+$/) !== null;
+    }
+
+    function isNumeric(str) {
+      return str.match(/^[0-9]+$/) !== null;
     }
 
   </script>
 </body>
+
 </html>
