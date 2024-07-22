@@ -11,22 +11,10 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn get_accounts_stub() -> String {
-    let data = r#"
-        { "accounts": [{ 
-                    "name"  : "checking 1",
-                    "type"    : "CHECK",
-                    "balance" : 0.0,
-                },
-                {
-                    "name"  : "checking 2",
-                    "type"    : "CHECK",
-                    "balance" : 0.0,
-                },
-            ]}"#;
-    let s = format!("{}", data);
-    println!("{}", s);
-    s
+fn save_new_account(serialized: &str) -> bool {
+    // let deserialized: Account = serde_json::from_str(&serialized).unwrap();
+    println!("From Frontend // {}", serialized);
+    true
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -36,7 +24,7 @@ enum AccountKind {
     Invest = 3,
     I529 = 4,
     Other = 5,
-    Debt = 6
+    Debt = 6,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -50,13 +38,31 @@ struct Account {
 #[tauri::command]
 fn get_accounts_rust() -> serde_json::Value {
     let a = Account {
-        name: "my checking 1234".to_string(),
+        name: String::from("my checking 1234"),
         kind: AccountKind::Check,
         balance: 1234.56,
-        balance_paid: 999.00,
+        balance_paid: 0.0,
     };
 
-    json!(a)
+    let b: Account = Account {
+        name: String::from("bill pay account"),
+        kind: AccountKind::Check,
+        balance: 987.65,
+        balance_paid: 0.0,
+    };
+
+    let c: Account = Account {
+        name: String::from("a shoebox"),
+        kind: AccountKind::Other,
+        balance: 17.12,
+        balance_paid: 0.0,
+    };
+
+    let mut v = vec![];
+    v.push(a);
+    v.push(b);
+    v.push(c);
+    json!(v)
 }
 
 fn main() {
@@ -67,8 +73,8 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             greet,             // hello world
-            get_accounts_stub, // get hardcoded json as a string
             get_accounts_rust, // get a rust Account Object as json
+            save_new_account,  // handle account data sent from the UI
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -1,3 +1,43 @@
 :root {
   --accent: rgb(0, 242, 255);
 }
+
+.app-brand {
+  margin-top: 0.5em;
+  background-color: #ddd;
+  box-sizing: content-box;
+  border-radius: 12px 0 0 12px;
+}
+
+.no-dec {
+  list-style-type: none;
+}
+
+.pad {
+  padding: 1em;
+}
+
+.pad-lt {
+  padding-left: 1em;
+}
+
+.flt-rt {
+  float: right;
+}
+
+.mar-rt {
+  margin-right: 0.5em;
+}
+
+.hide-me {
+  display: none;
+}
+
+input.invalid,
+input:invalid {
+  box-shadow: 0 0 5px 1px rgb(62, 194, 242);
+}
+
+input:focus:invalid {
+  box-shadow: none;
+}

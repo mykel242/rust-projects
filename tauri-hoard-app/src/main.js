@@ -1,15 +1,12 @@
 const { invoke } = window.__TAURI__.tauri;
+// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-// let greetInputEl;
-// let greetMsgEl;
-let btnNewAccount;
-let divNewAccountFormContainer;
+async function greet(name) {
+  let foo = await invoke("greet", { 
+      name: name 
+  });
 
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  // greetMsgEl.textContent = await invoke("greet", { 
-  //     name: greetInputEl.value 
-  // });
+  return foo;
 }
 
 async function get_accounts_stub() {
@@ -24,27 +21,10 @@ async function get_accounts_rust() {
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  // get_accounts_stub();
-  get_accounts_rust();
-  // greetInputEl = document.querySelector("#greet-input");
-  // greetMsgEl = document.querySelector("#greet-msg");
-  // document.querySelector("#greet-form").addEventListener("submit", (e) => {
-  //   e.preventDefault();
-  //   greet();
-  // });
-
-  btnNewAccount = document.querySelector("#btn-new-account");
-  divNewAccountFormContainer = document.querySelector("#new-account-form-container");
-
-  btnNewAccount.addEventListener("click", (e) =>{
-    e.preventDefault();
-    console.log("New Account Button Clicked");
-    // divNewAccountFormContainer.removeAttribute("hidden");
-    // btnNewAccount.setAttribute("disabled", "");
-    // btnNewAccount.classList.remove("uk-button-primary");
-    // btnNewAccount.classList.add("uk-button-disabled");
-
+  greet("velociraptors").then((greeting) => {
+    console.log(greeting);
   });
-  //document.querySelector
-
+  
+  get_accounts_rust();
+ 
 });
