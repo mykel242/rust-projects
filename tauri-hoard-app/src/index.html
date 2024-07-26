@@ -1,87 +1,120 @@
 <!doctype html>
 <html>
+    <head>
+        <title>My Test App</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/uikit/css/uikit.css" />
+        <link rel="stylesheet" href="/custom.css" />
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/uikit/js/uikit.min.js"></script>
+        <script src="/uikit/js/uikit-icons.min.js"></script>
 
-<head>
-  <title>My Test App</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/uikit/css/uikit.css" />
-  <link rel="stylesheet" href="/custom.css" />
-  <script src="/jquery/jquery.min.js"></script>
-  <script src="/uikit/js/uikit.min.js"></script>
-  <script src="/uikit/js/uikit-icons.min.js"></script>
+        <!-- Tauri / Rust bindings-->
+        <script type="module" src="/main.js" defer></script>
+        <script src="/index.js" defer></script>
+    </head>
 
-  <!-- Tauri / Rust bindings-->
-  <script type="module" src="/main.js" defer></script>
-  <script src="/index.js" defer></script>
+    <body>
+        <div class="uk-container uk-margin-top">
+            <!-- top nav bar -->
+            <ul uk-tab>
+                <li class="uk-active"><a href="#">home</a></li>
+                <li><a href="#">accounts</a></li>
+            </ul>
 
-</head>
-
-<body>
-  <div class="uk-container uk-margin-top">
-    <!-- top nav bar -->
-    <ul uk-tab>
-      <li class="uk-active"><a href="#">home</a></li>
-      <li><a href="#">accounts</a></li>
-    </ul>
-    <div class="uk-position-top-right app-brand">
-      <ul class="uk-margin-top uk-margin-right no-dec">
-        <li>
-          <h2>hoard.</h2>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!-- outer-most container -->
-
-  <div class="uk-container uk-margin">
-    <button id="btn-new-account" class="uk-button uk-button-primary"><span uk-icon="plus-circle"></span>
-      Account</button>
-  </div>
-
-
-  <div id="welcome-section" class="uk-container uk-margin hide-me">
-    <div class="uk-section uk-section-primary pad-lt">
-      <h3>hello world.</h3>
-      <p>Vestibulum eleifend sem ac dui fermentum facilisis. Aliquam faucibus, magna venenatis tincidunt laoreet, nibh
-        felis finibus dui, non ornare felis massa sit amet lorem. Donec hendrerit dignissim accumsan. Fusce auctor ante
-        turpis. Praesent imperdiet augue quis diam sollicitudin, non vestibulum ex interdum. Nulla sit amet magna
-        ligula.</p>
-    </div>
-  </div>
-
-  <div id="new-account-form" class="uk-container uk-margin hide-me">
-    <div class="uk-section uk-section-muted pad">
-      <form class="uk-margin">
-        <legend class="uk-legend">new account</legend>
-        <div class="uk-margin">
-          <label>Account</label>
-          <input id="new-account-form-label" class="uk-input" type="text" placeholder="required" aria-label="Input"
-            minlength="3" maxlength="512" required>
+            <div class="uk-position-top-right app-brand">
+                <ul class="uk-margin-top uk-margin-right no-dec">
+                    <li>
+                        <h2>hoard.</h2>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="uk-margin">
-          <label>Balance</label>
-          <input id="new-account-form-balance" class="uk-input" type="text" placeholder="$0.00" aria-label="Input"
-            required>
-        </div>
-        <div class="uk-margin">
-          <select id="new-account-form-type" class="uk-select" aria-label="Select" required>
-            <option disabled value="0" selected hidden>Type of Account</option>
-            <option value="1">Checking</option>
-            <option value="2">Saving</option>
-            <option value="3">Investment</option>
-            <option value="4">College (529)</option>
-            <option value="5">Other</option>
-            <option value="6">Debt</option>
-          </select>
-        </div>
-      </form>
-      <div class="uk-margin">
-        <button id="new-account-btn-ok" class="uk-button uk-button-primary flt-rt">ok</button>
-        <button id="new-account-btn-cancel" class="uk-button uk-button-secondary flt-rt mar-rt">cancel</button>
-      </div>
-    </div>
-  </div>
-</body>
+        <!-- outer-most container -->
 
+        <div class="uk-container uk-margin">
+            <button id="btn-new-account" class="uk-button uk-button-primary">
+                <span uk-icon="plus-circle"></span> Account
+            </button>
+        </div>
+
+        <div id="welcome-section" class="uk-container uk-margin hide-me">
+            <div class="uk-section uk-section-primary pad-lt">
+                <h3>hello world.</h3>
+                <p>
+                    Vestibulum eleifend sem ac dui fermentum facilisis. Aliquam
+                    faucibus, magna venenatis tincidunt laoreet, nibh felis
+                    finibus dui, non ornare felis massa sit amet lorem. Donec
+                    hendrerit dignissim accumsan. Fusce auctor ante turpis.
+                    Praesent imperdiet augue quis diam sollicitudin, non
+                    vestibulum ex interdum. Nulla sit amet magna ligula.
+                </p>
+            </div>
+        </div>
+
+        <div id="new-account-form" class="uk-container uk-margin hide-me">
+            <div class="uk-section uk-section-muted pad">
+                <form class="uk-margin">
+                    <legend class="uk-legend">new account</legend>
+                    <div class="uk-margin">
+                        <label>Account</label>
+                        <input
+                            id="new-account-form-label"
+                            class="uk-input"
+                            type="text"
+                            placeholder="required"
+                            aria-label="Input"
+                            minlength="3"
+                            maxlength="512"
+                            required
+                        />
+                    </div>
+                    <div class="uk-margin">
+                        <label>Balance</label>
+                        <input
+                            id="new-account-form-balance"
+                            class="uk-input"
+                            type="text"
+                            placeholder="$0.00"
+                            aria-label="Input"
+                            required
+                        />
+                    </div>
+                    <div class="uk-margin">
+                        <select
+                            id="new-account-form-type"
+                            class="uk-select"
+                            aria-label="Select"
+                            required
+                        >
+                            <option disabled value="0" selected hidden>
+                                Type of Account
+                            </option>
+                            <option value="1">Checking</option>
+                            <option value="2">Saving</option>
+                            <option value="3">Investment</option>
+                            <option value="4">College (529)</option>
+                            <option value="5">Other</option>
+                            <option value="6">Debt</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="uk-margin">
+                    <button
+                        id="new-account-btn-ok"
+                        class="uk-button uk-button-primary flt-rt"
+                    >
+                        ok
+                    </button>
+                    <button
+                        id="new-account-btn-cancel"
+                        class="uk-button uk-button-secondary flt-rt mar-rt"
+                    >
+                        cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
