@@ -22,37 +22,32 @@ struct Account {
 }
 
 fn main() -> Result<(), std::io::Error> {
-    // -- Write some account objects to a json file --
-    // let accounts = vec![
-    //     Account {
-    //         name: "Checking #222".to_string(),
-    //         balance: 999.00,
-    //         kind: AccountKind::Check,
-    //     },
-    //     Account {
-    //         name: "Slush #1234".to_string(),
-    //         balance: 1999.00,
-    //         kind: AccountKind::Save,
-    //     },
-    // ];
-
-    // let json = serde_json::to_string(&accounts).expect("Serialization broked.");
-    // println!("Serialized:\n {}", json);
-
-    // let out_file = File::create("outfile.json")?;
-    // let mut writer = BufWriter::new(out_file);
-    // serde_json::to_writer(&mut writer, &accounts)?;
-    // writer.flush()?;
-
+    let path = "infile.json".to_string();
     // -- Read some account objects from a json file --
-    let in_file = File::open("infile.json")?;
+    let in_file = File::open(&path)?;
     let reader = BufReader::new(in_file);
-    let read_accounts: Vec<Account> = serde_json::from_reader(reader)?;
-    println!("Read Accounts;\n {:#?}", read_accounts);
+    let mut accounts: Vec<Account> = serde_json::from_reader(reader)?;
+    println!("Read Accounts;\n {:#?}", accounts);
 
-    for account in read_accounts.iter() {
+    for account in accounts.iter() {
         println!("[{}] => ${}", account.name, account.balance);
     }
 
+    // -- Write some account objects to a json file --
+    let new_account = Account {
+        name: "a new one".to_string(),
+        balance: 0.0,
+        kind: AccountKind::Other,
+    };
+
+    // Append the new Account
+    accounts.push(new_account);
+    // let json = serde_json::to_string(&accounts).expect("Serialization broked.");
+    // println!("Serialized:\n {}", json);
+
+    let out_file = File::create(&path)?;
+    let mut writer = BufWriter::new(out_file);
+    serde_json::to_writer(&mut writer, &accounts)?;
+    writer.flush()?;
     Ok(())
 }

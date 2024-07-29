@@ -1,1 +1,7 @@
-[{"name":"Checking #222","kind":"Check","balance":999.0},{"name":"Slush #1234","kind":"Save","balance":1999.0}]
+[
+  { "name": "Checking #222", "kind": "Check", "balance": 999.0 },
+  { "name": "Slush #1234", "kind": "Save", "balance": 1999.0 },
+  { "name": "Random #667", "kind": "Other", "balance": 12.34 },
+  { "name": "College #1", "kind": "I529", "balance": 5000.0 },
+  { "name": "a new one", "kind": "Other", "balance": 432.1 }
+]
