@@ -5,7 +5,6 @@ let btnNewAccountOk;
 let btnNewAccountCancel;
 
 window.addEventListener("DOMContentLoaded", () => {
-
   // Show the form when the + account button is clicked
   btnNewAccount = document.querySelector("#btn-new-account");
   btnNewAccount.addEventListener("click", (e) => {
@@ -17,7 +16,6 @@ window.addEventListener("DOMContentLoaded", () => {
   // Check the form, save the data, hide the form
   btnNewAccountOk = document.querySelector("#new-account-btn-ok");
   btnNewAccountOk.addEventListener("click", (e) => {
-
     //TODO: I should rewrite this - the validation shouldnt be returning the data
     let account = validateNewAccountForm();
 
@@ -53,15 +51,16 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
- 
+
 async function save_new_account(account) {
-  let success = await invoke("save_new_account", { serialized: JSON.stringify(account)});
-  console.log(success ? "Account Saved":"Account Problem!");
+  let success = await invoke("save_new_account", {
+    serialized: JSON.stringify(account),
+  });
+  console.log(success ? "Account Saved" : "Account Problem!");
   return success;
 }
 
 function validateNewAccountForm() {
-
   let formValid = true;
   let newAccount = {};
   // check label is a string
@@ -71,7 +70,7 @@ function validateNewAccountForm() {
     console.log("Invalid Label");
     $("#new-account-form-label").addClass("invalid");
   } else {
-    newAccount['name'] = label;
+    newAccount["name"] = label;
     $("#new-account-form-label").removeClass("invalid");
   }
 
@@ -83,7 +82,7 @@ function validateNewAccountForm() {
     console.log("Invalid Balance");
     $("#new-account-form-balance").addClass("invalid");
   } else {
-    newAccount['balance'] = result;
+    newAccount["balance"] = parseFloat(balance);
     $("#new-account-form-balance").removeClass("invalid");
   }
 
@@ -93,10 +92,10 @@ function validateNewAccountForm() {
     formValid = false;
     console.log("Invalid Type");
   } else {
-    newAccount['type'] = type;
+    newAccount["kind"] = type;
   }
 
-  return (formValid ? newAccount : null);
+  return formValid ? newAccount : null;
 }
 
 function resetAccountForm() {
