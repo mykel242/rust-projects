@@ -50,5 +50,9 @@ fn main() -> Result<(), std::io::Error> {
     let read_accounts: Vec<Account> = serde_json::from_reader(reader)?;
     println!("Read Accounts;\n {:#?}", read_accounts);
 
+    for account in read_accounts.iter() {
+        println!("[{}] => ${}", account.name, account.balance);
+    }
+
     Ok(())
 }
