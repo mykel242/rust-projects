@@ -46,7 +46,7 @@ fn main() -> Result<(), std::io::Error> {
 
     // -- Read some account objects from a json file --
     let in_file = File::open("infile.json")?;
-    let mut reader = BufReader::new(in_file);
+    let reader = BufReader::new(in_file);
     let read_accounts: Vec<Account> = serde_json::from_reader(reader)?;
     println!("Read Accounts;\n {:#?}", read_accounts);
 
