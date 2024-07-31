@@ -1,7 +1,6 @@
 use serde::{Deserialize, Serialize};
-// use serde_json::json;
-
-#[derive(Debug, Serialize, Deserialize)]
+use std::hash::{Hash, Hasher};
+#[derive(Debug, Serialize, Deserialize, PartialEq, Hash, Eq)]
 pub enum AccountKind {
     Check,
     Save,
@@ -11,9 +10,8 @@ pub enum AccountKind {
     Debt,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Eq, Hash, PartialEq)]
 pub struct Account {
     pub name: String,
     pub kind: AccountKind,
-    pub balance: f32,
 }
