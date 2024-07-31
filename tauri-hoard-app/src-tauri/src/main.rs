@@ -3,8 +3,14 @@
 mod account;
 use account::{Account, AccountKind};
 use serde_json::json;
+use std::{collections::HashMap, sync::Mutex};
 use tauri::Error;
-// use std::collections::HashMap;
+use tauri::State;
+use uuid::Uuid;
+
+struct Storage {
+    store: Mutex<HashMap<Uuid, String>>,
+}
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -43,13 +49,29 @@ fn get_accounts_rust() -> serde_json::Value {
     json!(v)
 }
 
+#[tauri::command]
+fn storage_insert(key: &str, value: String, storage: State<Storage>) {
+    // mutate the storage behind the Mutex
+
+    // FIXME: Does this silently fail if the key is badly formed?
+    let id = match Uuid::parse_str(key) {
+        Ok(uuid) => uuid,
+        Err(_) => return,
+    };
+    storage.store.lock().unwrap().insert(id, value);
+}
+
 fn main() {
     tauri::Builder::default()
+        .manage(Storage {
+            store: Default::default(),
+        })
         .setup(|_app| Ok(()))
         .invoke_handler(tauri::generate_handler![
             greet,             // hello world
             get_accounts_rust, // get a rust Account Object as json
             save_new_account,  // handle account data sent from the UI
+            storage_insert,    // Testing state management
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
