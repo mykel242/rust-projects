@@ -15,13 +15,18 @@ struct Storage {
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 fn greet(name: &str) -> String {
+    println!("Greet called from frontend [{}]", name);
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
 #[tauri::command]
 fn save_new_account(serialized: &str) -> Result<bool, Error> {
-    let _: Account = serde_json::from_str(&serialized).unwrap();
-    println!("From Frontend // {}", serialized);
+    let mut account: Account = serde_json::from_str(&serialized).unwrap();
+
+    let new_id: Option<Uuid> = Some(Uuid::new_v4());
+    account.id = new_id;
+    println!("From Frontend // {} => {:#?}", serialized, account.id);
+
     Ok(true)
 }
 
@@ -30,16 +35,19 @@ fn get_accounts_rust() -> serde_json::Value {
     let a = Account {
         name: String::from("my checking 1234"),
         kind: AccountKind::Check,
+        id: Some(Uuid::new_v4()),
     };
 
     let b: Account = Account {
         name: String::from("bill pay account"),
         kind: AccountKind::Check,
+        id: Some(Uuid::new_v4()),
     };
 
     let c: Account = Account {
         name: String::from("a shoebox"),
         kind: AccountKind::Other,
+        id: Some(Uuid::new_v4()),
     };
 
     let mut v = vec![];

@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use uuid::Uuid;
+
 #[derive(Debug, Serialize, Deserialize, PartialEq, Hash, Eq)]
 pub enum AccountKind {
     Check,
@@ -14,4 +16,5 @@ pub enum AccountKind {
 pub struct Account {
     pub name: String,
     pub kind: AccountKind,
+    pub id: Option<Uuid>,
 }
