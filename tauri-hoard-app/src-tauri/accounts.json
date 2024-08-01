@@ -1,0 +1,32 @@
+[
+  {
+    "id": "5d45a47f-99eb-441a-b2e2-bf154d2624c7",
+    "name": "Checking #222",
+    "kind": "Check"
+  },
+  {
+    "id": "9076f08b-d29b-4961-a846-fa9d7a040ecc",
+    "name": "Slush #1234",
+    "kind": "Save"
+  },
+  {
+    "id": "4b482ec6-313a-4131-9e80-2d433af9c5c3",
+    "name": "Random #667",
+    "kind": "Other"
+  },
+  {
+    "id": "e790f1cb-c2ca-4e8a-9208-259492b1eb9b",
+    "name": "College #1",
+    "kind": "I529"
+  },
+  {
+    "id": "ac35c986-6961-490c-ae88-9bf2f2d3b929",
+    "name": "a new one",
+    "kind": "Other"
+  },
+  {
+    "id": "4936a66e-8e04-4bcf-bfab-60944c1a9aae",
+    "name": "a new one",
+    "kind": "Other"
+  }
+]

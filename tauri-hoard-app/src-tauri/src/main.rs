@@ -3,6 +3,10 @@
 mod account;
 use account::{Account, AccountKind};
 use serde_json::json;
+use std::fs::File;
+use std::io::{BufReader, BufWriter};
+// use std::io::prelude::*;
+use std::path::Path;
 use std::{collections::HashMap, sync::Mutex};
 use tauri::Error;
 use tauri::State;
@@ -23,10 +27,9 @@ fn greet(name: &str) -> String {
 fn save_new_account(serialized: &str) -> Result<bool, Error> {
     let mut account: Account = serde_json::from_str(&serialized).unwrap();
 
-    let new_id: Option<Uuid> = Some(Uuid::new_v4());
+    let new_id = Some(Uuid::new_v4());
     account.id = new_id;
     println!("From Frontend // {} => {:#?}", serialized, account.id);
-
     Ok(true)
 }
 
@@ -69,12 +72,47 @@ fn storage_insert(key: &str, value: String, storage: State<Storage>) {
     storage.store.lock().unwrap().insert(id, value);
 }
 
+fn read_accounts() -> Result<(), std::io::Error> {
+    let path = Path::new("accounts.json");
+    let path_display = path.display();
+    println!("read_accounts [{}]", path_display);
+
+    let file = match File::open(&path) {
+        Err(why) => panic!("Could not open {}: {}", path_display, why),
+        Ok(file) => {
+            println!("Opened![{}]", path_display);
+            file
+        }
+    };
+    let reader = BufReader::new(file);
+    let mut av: Vec<Account> = match serde_json::from_reader(reader) {
+        Ok(av) => av,
+        Err(why) => panic!("NOPE! [{}]", why),
+    };
+
+    let c: Account = Account {
+        name: String::from("a shoebox"),
+        kind: AccountKind::Other,
+        id: Some(Uuid::new_v4()),
+    };
+
+    av.push(c);
+
+    for account in av.iter() {
+        println!("{:?}", account);
+    }
+    Ok(())
+}
+
 fn main() {
     tauri::Builder::default()
         .manage(Storage {
             store: Default::default(),
         })
-        .setup(|_app| Ok(()))
+        .setup(|_app| {
+            let _ = read_accounts();
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             greet,             // hello world
             get_accounts_rust, // get a rust Account Object as json
