@@ -9,13 +9,8 @@ async function greet(name) {
   return foo;
 }
 
-async function get_accounts_stub() {
-  let data = await invoke("get_accounts_stub");
-  console.log(data);
-}
-
-async function get_accounts_rust() {
-  let data = await invoke("get_accounts_rust");
+async function get_accounts() {
+  let data = await invoke("get_accounts");
   console.log(data);
 }
 
@@ -24,5 +19,5 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log(greeting);
   });
 
-  get_accounts_rust();
+  get_accounts();
 });
