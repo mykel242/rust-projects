@@ -105,12 +105,12 @@ fn setup_storage() {
         println!("! {:?}", why.kind());
     });
 
-    // let account_path = path.clone();
-    // account_path.join("accounts.json");
-    // OpenOptions::new()
-    //     .create(true)
-    //     .write(true)
-    //     .open(account_path);
+    let account_path = data_dir.clone().join("accounts.json");
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .open(account_path);
 }
 
 fn main() {
