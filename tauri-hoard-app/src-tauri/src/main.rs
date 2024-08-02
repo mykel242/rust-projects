@@ -50,14 +50,18 @@ fn get_accounts() -> serde_json::Value {
 
 //fn write_accounts(accounts: Vec<Account>) -> Result<u16, std::io::Error> {
 fn write_accounts(accounts: Vec<Account>) {
-    let path = Path::new("accounts.json");
-    let path_display = path.display();
-    println!("write_accounts [{}]", path_display);
+    let data_path = tauri::api::path::data_dir().unwrap();
+    let accounts_path = data_path
+        .as_path()
+        .join("xyz.dotpitch.hoard")
+        .join("data")
+        .join("accounts.json");
+    println!("Accounts Path => [{}]", accounts_path.display());
 
-    let file = match File::create(&path) {
-        Err(why) => panic!("Could not open {}: {}", path_display, why),
+    let file = match File::create(&accounts_path) {
+        Err(why) => panic!("Could not open {:?}: {}", accounts_path, why),
         Ok(file) => {
-            println!("Opened![{}]", path_display);
+            println!("Opened![{:?}]", accounts_path);
             file
         }
     };
@@ -65,22 +69,21 @@ fn write_accounts(accounts: Vec<Account>) {
     let mut writer = BufWriter::new(file);
     let _ = serde_json::to_writer(&mut writer, &accounts);
     let _ = writer.flush();
-    // TODO: What should we return here on success?
-    // Ok(42)
 }
 
 fn read_accounts() -> Result<Vec<Account>, std::io::Error> {
-    let av = vec![];
-    Ok(av)
-    /*
-    let path = Path::new("data/accounts.json");
-    let path_display = path.display();
-    println!("read_accounts [{}]", path_display);
+    let data_path = tauri::api::path::data_dir().unwrap();
+    let accounts_path = data_path
+        .as_path()
+        .join("xyz.dotpitch.hoard")
+        .join("data")
+        .join("accounts.json");
+    println!("Accounts Path => [{}]", accounts_path.display());
 
-    let file = match File::open(&path) {
-        Err(why) => panic!("Could not open {}: {}", path_display, why),
+    let file = match File::open(&accounts_path) {
+        Err(why) => panic!("Could not open {:?}: {}", accounts_path, why),
         Ok(file) => {
-            println!("Opened![{}]", path_display);
+            println!("Opened![{:?}]", accounts_path);
             file
         }
     };
@@ -94,7 +97,6 @@ fn read_accounts() -> Result<Vec<Account>, std::io::Error> {
         println!("{:?}", account);
     }
     Ok(av)
-    */
 }
 
 fn setup_storage() {
@@ -106,7 +108,7 @@ fn setup_storage() {
     });
 
     let account_path = data_dir.clone().join("accounts.json");
-    let file = OpenOptions::new()
+    let _file = OpenOptions::new()
         .read(true)
         .write(true)
         .create(true)
@@ -116,8 +118,6 @@ fn setup_storage() {
 fn main() {
     tauri::Builder::default()
         .setup(|_app| {
-            // let _ = read_accounts();
-            //println!("Resources => [{}]", resource_path.display());
             setup_storage();
             Ok(())
         })
