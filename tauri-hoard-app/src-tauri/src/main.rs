@@ -3,9 +3,10 @@
 mod account;
 use account::Account;
 use serde_json::json;
+use std::fs::{create_dir_all, File, OpenOptions};
+use std::io::Write;
 use std::io::{BufReader, BufWriter};
-use std::path::Path;
-use std::{fs::File, io::Write};
+use std::path::{Path, PathBuf};
 use tauri::Error;
 use uuid::Uuid;
 
@@ -16,7 +17,7 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn save_new_account(serialized: &str) -> Result<bool, Error> {
+fn save_new_account(handle: tauri::AppHandle, serialized: &str) -> Result<bool, Error> {
     let mut account: Account = serde_json::from_str(&serialized).unwrap();
     let new_id = Some(Uuid::new_v4());
     account.id = new_id;
@@ -27,6 +28,12 @@ fn save_new_account(serialized: &str) -> Result<bool, Error> {
         Err(why) => panic!("{}", why),
     };
     av.push(account);
+
+    // let _ = handle
+    //     .path_resolver()
+    //     .resolve_resource("data/accounts.json")
+    //     .expect("failed to resolve resource");
+
     let _ = write_accounts(av);
 
     Ok(true)
@@ -63,7 +70,10 @@ fn write_accounts(accounts: Vec<Account>) {
 }
 
 fn read_accounts() -> Result<Vec<Account>, std::io::Error> {
-    let path = Path::new("accounts.json");
+    let av = vec![];
+    Ok(av)
+    /*
+    let path = Path::new("data/accounts.json");
     let path_display = path.display();
     println!("read_accounts [{}]", path_display);
 
@@ -80,26 +90,35 @@ fn read_accounts() -> Result<Vec<Account>, std::io::Error> {
         Err(why) => panic!("NOPE! [{}]", why),
     };
 
-    /*
-    let c: Account = Account {
-        name: String::from("a shoebox"),
-        kind: AccountKind::Other,
-        id: Some(Uuid::new_v4()),
-    };
-
-    av.push(c);
-     */
-
     for account in av.iter() {
         println!("{:?}", account);
     }
     Ok(av)
+    */
+}
+
+fn setup_storage() {
+    let data_path = tauri::api::path::data_dir().unwrap();
+    let data_dir = data_path.as_path().join("xyz.dotpitch.hoard").join("data");
+    println!("Data Dir => [{}]", data_dir.display());
+    create_dir_all(&data_dir).unwrap_or_else(|why| {
+        println!("! {:?}", why.kind());
+    });
+
+    // let account_path = path.clone();
+    // account_path.join("accounts.json");
+    // OpenOptions::new()
+    //     .create(true)
+    //     .write(true)
+    //     .open(account_path);
 }
 
 fn main() {
     tauri::Builder::default()
         .setup(|_app| {
             // let _ = read_accounts();
+            //println!("Resources => [{}]", resource_path.display());
+            setup_storage();
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
