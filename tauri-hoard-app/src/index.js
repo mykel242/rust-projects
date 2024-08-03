@@ -4,7 +4,26 @@ let btnNewAccount;
 let btnNewAccountOk;
 let btnNewAccountCancel;
 
+async function get_accounts() {
+  const json = await invoke("get_accounts");
+  return json;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
+  get_accounts().then((accounts) => {
+    let aBlob = "";
+    if (accounts.length > 0) {
+      for (let i = 0; i < accounts.length; i++) {
+        console.log(accounts[i]);
+        let item = `<li id="id-${accounts[i].id}">
+        ${accounts[i].name}</li>`;
+        aBlob += item;
+      }
+      $("#accounts-list").html(aBlob);
+    }
+    $("#accounts-block").fadeToggle();
+  });
+
   // Show the form when the + account button is clicked
   btnNewAccount = document.querySelector("#btn-new-account");
   btnNewAccount.addEventListener("click", (e) => {
@@ -75,16 +94,16 @@ function validateNewAccountForm() {
   }
 
   // check that balance is a number
-  let balance = $("#new-account-form-balance").val().trim();
-  let result = Intl.NumberFormat("us-EN").format(balance);
-  if (result == "NaN") {
-    formValid = false;
-    console.log("Invalid Balance");
-    $("#new-account-form-balance").addClass("invalid");
-  } else {
-    newAccount["balance"] = parseFloat(balance);
-    $("#new-account-form-balance").removeClass("invalid");
-  }
+  // let balance = $("#new-account-form-balance").val().trim();
+  // let result = Intl.NumberFormat("us-EN").format(balance);
+  // if (result == "NaN") {
+  //   formValid = false;
+  //   console.log("Invalid Balance");
+  //   $("#new-account-form-balance").addClass("invalid");
+  // } else {
+  //   newAccount["balance"] = parseFloat(balance);
+  //   $("#new-account-form-balance").removeClass("invalid");
+  // }
 
   // check that type is not 0
   let type = $("#new-account-form-type").val();
@@ -100,7 +119,7 @@ function validateNewAccountForm() {
 
 function resetAccountForm() {
   $("#new-account-form-label").val("");
-  $("#new-account-form-balance").val("");
+  // $("#new-account-form-balance").val("");
   $("#new-account-form-type").val(0);
 }
 

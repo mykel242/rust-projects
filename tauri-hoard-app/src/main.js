@@ -9,15 +9,8 @@ async function greet(name) {
   return foo;
 }
 
-async function get_accounts() {
-  let data = await invoke("get_accounts");
-  console.log(data);
-}
-
 window.addEventListener("DOMContentLoaded", () => {
   greet("velociraptors").then((greeting) => {
     console.log(greeting);
   });
-
-  get_accounts();
 });

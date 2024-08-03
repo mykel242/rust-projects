@@ -20,7 +20,7 @@
             <!-- top nav bar -->
             <ul uk-tab>
                 <li class="uk-active"><a href="#">home</a></li>
-                <li><a href="#">accounts</a></li>
+                <!-- <li><a href="#">accounts</a></li> -->
             </ul>
 
             <div class="uk-position-top-right app-brand">
@@ -39,16 +39,14 @@
             </button>
         </div>
 
-        <div id="welcome-section" class="uk-container uk-margin hide-me">
+        <div id="welcome-section" class="uk-container uk-margin x-hide-me">
             <div class="uk-section uk-section-primary pad-lt">
                 <h3>hello world.</h3>
                 <p>
                     Vestibulum eleifend sem ac dui fermentum facilisis. Aliquam
                     faucibus, magna venenatis tincidunt laoreet, nibh felis
-                    finibus dui, non ornare felis massa sit amet lorem. Donec
-                    hendrerit dignissim accumsan. Fusce auctor ante turpis.
-                    Praesent imperdiet augue quis diam sollicitudin, non
-                    vestibulum ex interdum. Nulla sit amet magna ligula.
+                    finibus dui, non ornare felis massa sit amet lorem. Nulla
+                    sit amet magna ligula.
                 </p>
             </div>
         </div>
@@ -67,17 +65,6 @@
                             aria-label="Input"
                             minlength="3"
                             maxlength="512"
-                            required
-                        />
-                    </div>
-                    <div class="uk-margin">
-                        <label>Balance</label>
-                        <input
-                            id="new-account-form-balance"
-                            class="uk-input"
-                            type="text"
-                            placeholder="$0.00"
-                            aria-label="Input"
                             required
                         />
                     </div>
@@ -114,6 +101,18 @@
                         cancel
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <div id="accounts-block" class="uk-container uk-margin hide-me">
+            <div class="uk-section uk-section-secondary pad">
+                <ul id="accounts-list">
+                    <li>placeholder</li>
+                    <li>placeholder</li>
+                    <li>placeholder</li>
+                    <li>placeholder</li>
+                    <li>placeholder</li>
+                </ul>
             </div>
         </div>
     </body>
