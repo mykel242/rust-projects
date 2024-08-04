@@ -1,6 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-mod account;
+mod account; // TODO: review this; not sure I've got the pattern correct
 use account::Account;
 use serde_json::json;
 use std::fs::{create_dir_all, File, OpenOptions};
@@ -23,6 +23,8 @@ fn save_new_account(_handle: tauri::AppHandle, serialized: &str) -> Result<bool,
     account.id = new_id;
     println!("From Frontend // {} => {:#?}", serialized, account.id);
 
+    // TODO: This assumes accounts could be read and the new account could be written
+    // and it always returns true to the frontend - which would be nice if true
     let mut av = read_accounts();
     av.push(account);
     let _ = write_accounts(av);
@@ -36,14 +38,8 @@ fn get_accounts_json() -> serde_json::Value {
 }
 
 fn write_accounts(accounts: Vec<Account>) {
-    let data_path = tauri::api::path::data_dir().unwrap();
-    let accounts_path = data_path
-        .as_path()
-        .join("xyz.dotpitch.hoard")
-        .join("data")
-        .join("accounts.json");
-    println!("Accounts Path => [{}]", accounts_path.display());
-
+    // TODO: This function can silently fail.
+    let accounts_path = get_accounts_path();
     let file = match File::create(&accounts_path) {
         Err(why) => panic!("Could not open {:?}: {}", accounts_path, why),
         Ok(file) => {
@@ -94,6 +90,7 @@ fn get_accounts_path() -> PathBuf {
 }
 
 fn setup_storage() {
+    // TODO: This can silently fail
     let accounts_path = get_accounts_path();
     let _file = OpenOptions::new()
         .read(true)
