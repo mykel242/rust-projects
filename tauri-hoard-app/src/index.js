@@ -5,11 +5,11 @@ let btnNewAccountOk;
 let btnNewAccountCancel;
 
 async function get_accounts() {
-  const json = await invoke("get_accounts");
+  const json = await invoke("get_accounts_json");
   return json;
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+function refresh_accounts() {
   get_accounts().then((accounts) => {
     let aBlob = "";
     if (accounts.length > 0) {
@@ -19,10 +19,14 @@ window.addEventListener("DOMContentLoaded", () => {
         ${accounts[i].name}</li>`;
         aBlob += item;
       }
-      $("#accounts-list").html(aBlob);
     }
-    $("#accounts-block").fadeToggle();
+    $("#accounts-list").html(aBlob);
+    $("#accounts-block").fadeIn();
   });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  refresh_accounts();
 
   // Show the form when the + account button is clicked
   btnNewAccount = document.querySelector("#btn-new-account");
@@ -44,6 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log("Ship it!");
       save_new_account(account).then((result) => {
         console.log("save account result:", result);
+        refresh_accounts();
       });
 
       // hide the form
