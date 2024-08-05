@@ -1,18 +1,19 @@
 use serde::{Deserialize, Serialize};
-use std::hash::Hash;
+use std::{default, hash::Hash};
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Hash, Eq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub enum AccountKind {
     Check,
     Save,
     Invest,
     I529,
-    Other,
     Debt,
+    #[default]
+    Other,
 }
 
-#[derive(Debug, Serialize, Deserialize, Eq, Hash, PartialEq)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub struct Account {
     pub name: String,
     pub kind: AccountKind,
