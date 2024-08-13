@@ -1,4 +1,4 @@
-use pixels::{Error, Pixels, SurfaceTexture};
+use pixels::{Pixels, SurfaceTexture};
 use tao::dpi::LogicalSize;
 use tao::keyboard::KeyCode;
 use tao::menu::{MenuBar, MenuItem};
@@ -9,6 +9,12 @@ use tao::{
 };
 const WIDTH: u32 = 300;
 const HEIGHT: u32 = 300;
+struct World {
+    // box_x: i16,
+    // box_y: i16,
+    // velocity_x: i16,
+    // velocity_y: i16,
+}
 
 fn main() {
     let event_loop = EventLoop::new();
@@ -34,6 +40,8 @@ fn main() {
         let surface_texture = SurfaceTexture::new(window_size.width, window_size.height, &window);
         Pixels::new(WIDTH, HEIGHT, surface_texture).unwrap()
     };
+
+    let mut world = World::new();
 
     event_loop.run(move |event, _, control_flow| {
         match event {
@@ -64,13 +72,13 @@ fn main() {
 
             // Update internal state and request a redraw
             Event::MainEventsCleared => {
-                // world.update();
+                world.update();
                 window.request_redraw();
             }
 
             // Draw the current frame
             Event::RedrawRequested(_) => {
-                // world.draw(pixels.frame_mut());
+                world.draw(pixels.frame_mut());
                 if let Err(err) = pixels.render() {
                     println!("pixels.render: {}", err);
                     *control_flow = ControlFlow::Exit;
@@ -80,4 +88,39 @@ fn main() {
             _ => {}
         }
     });
+}
+
+impl World {
+    /// Create a new `World` instance that can draw a moving box.
+    fn new() -> Self {
+        Self {
+            // box_x: 24,
+            // box_y: 16,
+            // velocity_x: 1,
+            // velocity_y: 1,
+        }
+    }
+
+    fn update(&mut self) {}
+
+    fn draw(&self, frame: &mut [u8]) {
+        for (i, pixel) in frame.chunks_exact_mut(4).enumerate() {
+            // let x = (i % WIDTH as usize) as i16;
+            // let y = (i / WIDTH as usize) as i16;
+
+            // let inside_the_box = x >= self.box_x
+            //     && x < self.box_x + BOX_SIZE
+            //     && y >= self.box_y
+            //     && y < self.box_y + BOX_SIZE;
+
+            // let rgba = if inside_the_box {
+            //     [0x5e, 0x48, 0xe8, 0xff]
+            // } else {
+            //     [0x48, 0xb2, 0xe8, 0xff]
+            // };
+
+            let rgba = [0x00, 0xff, 0x00, 0xff];
+            pixel.copy_from_slice(&rgba);
+        }
+    }
 }
