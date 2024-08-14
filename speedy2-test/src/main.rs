@@ -18,19 +18,19 @@ impl WindowHandler for MyWindowHandler {
         graphics.draw_circle((425.0, 175.0), 100.0, c.clone());
         graphics.draw_circle((175.0, 175.0), 100.0, c.clone());
 
-        graphics.draw_circle_section_triangular_three_color(
-            [
-                Vec2::new(0.0, 0.0),
-                Vec2::new(100.0, 200.0),
-                Vec2::new(300.0, 300.0),
-            ],
-            [Color::MAGENTA; 3],
-            [
-                Vec2::new(-1.0, -1.0),
-                Vec2::new(1.0, -1.0),
-                Vec2::new(1.0, 1.0),
-            ],
-        );
+        // graphics.draw_circle_section_triangular_three_color(
+        //     [
+        //         Vec2::new(0.0, 0.0),
+        //         Vec2::new(100.0, 200.0),
+        //         Vec2::new(300.0, 300.0),
+        //     ],
+        //     [Color::MAGENTA; 3],
+        //     [
+        //         Vec2::new(-1.0, -1.0),
+        //         Vec2::new(1.0, -1.0),
+        //         Vec2::new(1.0, 1.0),
+        //     ],
+        // );
 
         helper.request_redraw();
     }
