@@ -18,13 +18,26 @@ fn main() {
         shapes: Vec::new(),
     };
 
-    for _ in 0..320 {
+    // let z = Shape {
+    //     points: vec![
+    //         Point { x: 0.0, y: 0.0 },
+    //         Point { x: 100.0, y: 0.0 },
+    //         Point { x: 100.0, y: 100.0 },
+    //         Point { x: 0.0, y: 100.0 },
+    //     ],
+    //     x_speed: 0.5,
+    //     y_speed: 5.0,
+    // };
+    // w.shapes.push(z);
+
+    for _ in 0..999 {
         let rx: f32 = rng.gen_range(0.0..WIDTH as f32);
         let ry: f32 = rng.gen_range(0.0..HEIGHT as f32);
         let rp: Point = Point { x: rx, y: ry };
         let mut s = Shape {
-            //center: rp.clone(),
             points: Vec::new(),
+            x_speed: rng.gen_range(-2.0..6.0),
+            y_speed: rng.gen_range(-2.0..6.0),
         };
         s.points.push(rp.clone());
         w.shapes.push(s);
@@ -50,14 +63,10 @@ impl WindowHandler for MyWindowHandler {
 }
 
 fn draw_shape(s: &Shape, graphics: &mut Graphics2D) {
-    let c1 = Color::from_hex_argb(0xFF000000);
     let c2 = Color::from_hex_argb(0x66FFFFFF);
-
     for p in s.points.iter() {
         graphics.draw_circle((p.x, p.y), 12.0, c2);
     }
-
-    // graphics.draw_circle((s.center.x, s.center.y), 4.0, c1);
 }
 
 #[derive(Debug, Clone)]
@@ -70,6 +79,27 @@ struct Point {
 struct Shape {
     //center: Point,
     points: Vec<Point>,
+    x_speed: f32,
+    y_speed: f32,
+}
+
+impl Shape {
+    fn update(&mut self) {
+        //TODO: pass a reference to the bounding rectangle of "the world"
+        // to get rid of the hardcoded 1000.0
+        for p in self.points.iter_mut() {
+            p.x += self.x_speed;
+            p.y += self.y_speed;
+
+            if p.x > 1000.0 || p.x < 0.0 {
+                self.x_speed *= -1.0;
+            }
+
+            if p.y > 1000.0 || p.y < 0.0 {
+                self.y_speed *= -1.0;
+            }
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -82,16 +112,8 @@ struct World {
 
 impl World {
     fn update(&mut self) {
-        let mut rng = rand::thread_rng();
-        const STEP: f32 = 4.0;
-        // for each shape / add some small random change
         for shape in self.shapes.iter_mut() {
-            let delta_x = rng.gen_range(-STEP..STEP);
-            let delta_y = rng.gen_range(-STEP..STEP);
-            for p in shape.points.iter_mut() {
-                p.x += delta_x;
-                p.y += delta_y;
-            }
+            shape.update();
         }
     }
 }
