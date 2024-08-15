@@ -1,0 +1,9 @@
+[package]
+name = "xp-noc-1_2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+glam = "0.28.0"
+rand = "0.8.5"
+speedy2d = "2.1.0"
