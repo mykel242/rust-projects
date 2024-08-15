@@ -3,6 +3,7 @@
 use glam::f32::Vec2;
 use rand::Rng;
 use speedy2d::color::Color;
+use speedy2d::dimen::UVec2;
 use speedy2d::window::{WindowHandler, WindowHelper};
 use speedy2d::Graphics2D;
 use speedy2d::Window;
@@ -12,7 +13,7 @@ fn main() {
     const WIDTH: u32 = 1000;
     const HEIGHT: u32 = 1000;
     const BACK_COLOR: Color = Color::from_rgb(0.2, 0.9, 0.2);
-    const NUM_SHAPES: u32 = 100;
+    const NUM_SHAPES: u32 = 1000;
 
     let window = Window::new_centered("xp-noc ex 1.2", (WIDTH, HEIGHT)).unwrap();
     let mut w = World {
@@ -22,46 +23,12 @@ fn main() {
         shapes: Vec::new(),
     };
 
-    // let s = Shape {
-    //     points: vec![
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //         Vec2 {
-    //             x: rng.gen_range(0.0..200.0),
-    //             y: rng.gen_range(0.0..200.0),
-    //         },
-    //     ],
-    //     //speed: Vec2 { x: 1.0, y: 0.0 },
-    //     speed: Vec2::new(rng.gen_range(-1.0..1.0), rng.gen_range(-1.0..1.0)),
-    //     bounds: (Vec2 { x: 0.0, y: 0.0 }, Vec2 { x: 0.0, y: 0.0 }),
-    // };
-
-    // w.shapes.push(s);
-
     for _ in 0..NUM_SHAPES {
         let mut s = Shape {
             points: vec![],
             speed: Vec2 {
-                x: rng.gen_range(-10.0..10.0),
-                y: rng.gen_range(-10.0..10.0),
+                x: rng.gen_range(-1.0..1.0),
+                y: rng.gen_range(-1.0..1.0),
             },
             bounds: (Vec2 { x: 0.0, y: 0.0 }, Vec2 { x: 0.0, y: 0.0 }),
         };
@@ -92,6 +59,15 @@ impl WindowHandler for MyWindowHandler {
         for s in self.world.shapes.iter() {
             draw_shape(&s, graphics);
         }
+        helper.request_redraw();
+    }
+
+    /// Invoked when the window is resized.
+
+    fn on_resize(&mut self, helper: &mut WindowHelper, size_pixels: UVec2) {
+        println!("Resized: {:#?}", size_pixels);
+        self.world._width = size_pixels.x;
+        self.world._height = size_pixels.y;
         helper.request_redraw();
     }
 }
