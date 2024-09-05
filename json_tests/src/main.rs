@@ -2,7 +2,6 @@ use std::io::{BufReader, BufWriter};
 use std::{fs::File, io::Write};
 
 use serde::{Deserialize, Serialize};
-// use serde_json::json;
 
 #[derive(Debug, Serialize, Deserialize)]
 enum AccountKind {
@@ -42,8 +41,6 @@ fn main() -> Result<(), std::io::Error> {
 
     // Append the new Account
     accounts.push(new_account);
-    // let json = serde_json::to_string(&accounts).expect("Serialization broked.");
-    // println!("Serialized:\n {}", json);
 
     let out_file = File::create(&path)?;
     let mut writer = BufWriter::new(out_file);
